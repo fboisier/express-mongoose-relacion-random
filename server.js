@@ -1,0 +1,16 @@
+const express = require("express");
+const app = express();
+
+// This will fire our mongoose.connect statement to initialize our database connection
+require("./server/config/mongoose.config");
+
+app.use(express.json(), express.urlencoded({ extended: true }));
+
+// This is where we import the users routes function from our user.routes.js file
+const AllMyUserRoutes = require("./server/routes/user.routes");
+AllMyUserRoutes(app);
+
+const AllMyLibroRoutes = require("./server/routes/libro.routes");
+AllMyLibroRoutes(app);
+
+app.listen(8008, () => console.log("Todo listo en: 8008"));
